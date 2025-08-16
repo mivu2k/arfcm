@@ -1,103 +1,135 @@
-import Image from "next/image";
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+import { CountdownTimer } from '@/components/countdown-timer';
+import { EmailSubscriptionForm } from '@/components/email-subscription-form';
+import { CustomInquiryForm } from '@/components/custom-inquiry-form';
+import { ContactSection } from '@/components/contact-section';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
+
+const stoneCollection = [
+  {
+    name: 'Calacatta Vagli',
+    description: 'Classic Italian marble with bold, elegant veining.',
+    image: 'https://placehold.co/600x400.png',
+    hint: 'marble texture'
+  },
+  {
+    name: 'Absolute Black',
+    description: 'A solid, deep black granite for a modern statement.',
+    image: 'https://placehold.co/600x400.png',
+    hint: 'granite slab'
+  },
+  {
+    name: 'Taj Mahal',
+    description: 'Creamy quartzite with gentle, flowing caramel veins.',
+    image: 'https://placehold.co/600x400.png',
+    hint: 'quartzite countertop'
+  },
+   {
+    name: 'Blue Bahia',
+    description: 'An exotic granite featuring a stunning blue hue.',
+    image: 'https://placehold.co/600x400.png',
+    hint: 'blue stone'
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const launchDate = new Date();
+  launchDate.setDate(launchDate.getDate() + 30); // Set launch for 30 days from now
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  return (
+    <div className="flex flex-col min-h-dvh bg-background text-foreground">
+      <Header />
+      <main className="flex-1">
+        <section id="home" className="relative h-screen flex items-center justify-center text-center text-white">
+           <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+              src="https://videos.pexels.com/video-files/7578544/7578544-hd_1920_1080_25fps.mp4"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+          <div className="relative z-10 p-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tighter">
+              Crafted by Nature, Perfected for You
+            </h1>
+            <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-stone-200">
+              Arfstone is coming soon to redefine luxury with the finest marble and granite selections from IS and Stone.
+            </p>
+            <CountdownTimer targetDate={launchDate} />
+             <div className="mt-8">
+               <EmailSubscriptionForm />
+             </div>
+          </div>
+        </section>
+
+        <section id="about" className="py-20 md:py-32 bg-secondary/30">
+          <div className="container grid md:grid-cols-2 gap-12 items-center">
+            <div>
+               <h2 className="text-3xl md:text-4xl font-bold font-headline">The Arfstone Legacy</h2>
+               <p className="mt-4 text-muted-foreground text-lg">
+                For generations, IS and Stone has been synonymous with quality and craftsmanship. Arfstone is our new chapter, a curated collection of the world's most exquisite natural stones, sourced with passion and precision. We believe every slab has a story, and our mission is to bring that story into your home.
+               </p>
+               <Button variant="outline" className="mt-6" asChild>
+                <a href="#contact">Learn More <ArrowRight className="ml-2" /></a>
+               </Button>
+            </div>
+            <div className="relative h-80 rounded-lg overflow-hidden shadow-xl">
+              <Image src="https://placehold.co/800x600.png" alt="Artisan carving stone" layout="fill" objectFit="cover" data-ai-hint="artisan carving" />
+            </div>
+          </div>
+        </section>
+
+        <section id="collection" className="py-20 md:py-32">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">Our Collection</h2>
+              <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">
+                A preview of the timeless beauty and exceptional quality that awaits.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {stoneCollection.map((stone) => (
+                <Card key={stone.name} className="overflow-hidden group border-primary/20 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-2">
+                   <CardContent className="p-0">
+                    <div className="relative h-64">
+                       <Image src={stone.image} alt={stone.name} layout="fill" objectFit="cover" data-ai-hint={stone.hint} />
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    </div>
+                     <div className="p-4 bg-secondary/20">
+                      <h3 className="font-bold font-headline text-xl">{stone.name}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">{stone.description}</p>
+                     </div>
+                   </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="inquiry" className="py-20 md:py-32 bg-secondary/30">
+          <div className="container grid md:grid-cols-2 gap-16 items-center">
+             <div className="max-w-xl">
+                <h2 className="text-3xl md:text-4xl font-bold font-headline">Bespoke Inquiries</h2>
+                <p className="mt-4 text-muted-foreground text-lg">
+                  Have a unique vision? Our master artisans can source and custom-cut stone to your exact specifications, ensuring your project is as unique as you are. Let's create something extraordinary together.
+                </p>
+                <ContactSection />
+             </div>
+             <div>
+              <CustomInquiryForm />
+             </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
